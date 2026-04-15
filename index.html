@@ -13,9 +13,9 @@
       --cream: #fdf6f0;
       --gold: #c9a96e;
     }
-
+ 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     body {
       min-height: 100vh;
       background-color: var(--cream);
@@ -26,7 +26,7 @@
       overflow: hidden;
       position: relative;
     }
-
+ 
     /* Soft petal background */
     body::before {
       content: '';
@@ -38,7 +38,7 @@
         radial-gradient(ellipse at 55% 10%, rgba(201,169,110,0.15) 0%, transparent 40%);
       pointer-events: none;
     }
-
+ 
     /* Floating hearts */
     .heart-bg {
       position: fixed;
@@ -61,14 +61,14 @@
     .heart-bg span:nth-child(6)  { left: 85%; animation-duration: 7s;  animation-delay: 4s; }
     .heart-bg span:nth-child(7)  { left: 15%; animation-duration: 11s; animation-delay: 5s;   font-size: 1rem; }
     .heart-bg span:nth-child(8)  { left: 62%; animation-duration: 8s;  animation-delay: 3.5s; font-size: 0.7rem; }
-
+ 
     @keyframes floatUp {
       0%   { transform: translateY(0) rotate(-10deg); opacity: 0; }
       10%  { opacity: 0.25; }
       90%  { opacity: 0.15; }
       100% { transform: translateY(-100vh) rotate(10deg); opacity: 0; }
     }
-
+ 
     /* Card */
     .card {
       position: relative;
@@ -86,12 +86,12 @@
         0 1px 0 rgba(255,255,255,0.9) inset;
       animation: cardIn 0.9s cubic-bezier(0.22,1,0.36,1) both;
     }
-
+ 
     @keyframes cardIn {
       from { opacity: 0; transform: translateY(28px) scale(0.97); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
-
+ 
     .lock-icon {
       font-size: 2.6rem;
       margin-bottom: 16px;
@@ -102,7 +102,7 @@
       0%,100% { transform: scale(1); }
       50%      { transform: scale(1.12); }
     }
-
+ 
     h1 {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
@@ -112,7 +112,7 @@
       line-height: 1.2;
       margin-bottom: 10px;
     }
-
+ 
     .subtitle {
       font-size: 0.88rem;
       color: var(--rose);
@@ -121,12 +121,12 @@
       margin-bottom: 36px;
       font-weight: 300;
     }
-
+ 
     .input-wrap {
       position: relative;
       margin-bottom: 16px;
     }
-
+ 
     input[type="password"] {
       width: 100%;
       padding: 14px 20px;
@@ -150,7 +150,7 @@
       border-color: var(--rose);
       box-shadow: 0 0 0 3px rgba(201,123,110,0.12);
     }
-
+ 
     button {
       width: 100%;
       padding: 14px;
@@ -175,7 +175,7 @@
     button:active {
       transform: translateY(0);
     }
-
+ 
     #message {
       margin-top: 14px;
       font-size: 0.82rem;
@@ -184,7 +184,7 @@
       min-height: 18px;
       font-style: italic;
     }
-
+ 
     /* Result */
     #result {
       display: none;
@@ -195,7 +195,7 @@
       from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
+ 
     .result-label {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -203,7 +203,7 @@
       color: var(--deep);
       margin-bottom: 14px;
     }
-
+ 
     .track-btn {
       display: inline-flex;
       align-items: center;
@@ -225,7 +225,7 @@
       transform: translateY(-2px);
       box-shadow: 0 7px 22px rgba(201,169,110,0.45);
     }
-
+ 
     .divider {
       width: 40px;
       height: 1px;
@@ -235,25 +235,28 @@
   </style>
 </head>
 <body>
-
+ 
   <div class="heart-bg">
     <span>🤍</span><span>🌸</span><span>🤍</span><span>🌷</span>
     <span>🤍</span><span>🌸</span><span>🌷</span><span>🤍</span>
   </div>
-
+ 
   <div class="card">
     <span class="lock-icon">🔒</span>
     <h1>Something's Waiting For You</h1>
     <p class="subtitle">Enter the secret code to reveal</p>
-
+ 
     <div class="input-wrap">
       <input type="password" id="passcode" placeholder="your secret code…" />
     </div>
-
+    <p style="font-size:0.76rem; color:#c4a8a2; letter-spacing:0.04em; margin-bottom:14px; font-style:italic;">
+      💡 Hint: all lowercase, no spaces
+    </p>
+ 
     <button onclick="checkCode()">Unlock ✨</button>
-
+ 
     <p id="message"></p>
-
+ 
     <div id="result">
       <div class="result-label">Your package is on its way, love 🎁</div>
       <a class="track-btn" href="https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9405530109355307803301" target="_blank">
@@ -262,16 +265,16 @@
       <div class="divider"></div>
     </div>
   </div>
-
+ 
   <script>
     const correctCode = "operationcarepackage";
-
+ 
     function checkCode() {
       const entered = document.getElementById("passcode").value;
       const result  = document.getElementById("result");
       const message = document.getElementById("message");
       const lock    = document.querySelector(".lock-icon");
-
+ 
       if (entered === correctCode) {
         result.style.display = "block";
         message.textContent  = "";
@@ -281,7 +284,7 @@
         message.textContent  = "That's not it, try again 🌹";
       }
     }
-
+ 
     document.getElementById("passcode").addEventListener("keydown", e => {
       if (e.key === "Enter") checkCode();
     });
